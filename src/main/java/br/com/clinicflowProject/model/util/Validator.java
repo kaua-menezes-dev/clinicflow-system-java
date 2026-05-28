@@ -1,5 +1,7 @@
 package br.com.clinicflowProject.model.util;
 
+import br.com.clinicflowProject.model.exceptions.ValidationException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,14 +12,14 @@ public final class Validator {
 
     public static void requireNonNull(Object object, String fieldName) {
         if (object == null) {
-            throw new IllegalArgumentException(fieldName + " não pode ser nulo.");
+            throw new ValidationException(fieldName + " não pode ser nulo.");
         }
     }
 
     public static void requireNonBlank(String value, String fieldName) {
         requireNonNull(value, fieldName);
         if (value.trim().isEmpty()) {
-            throw new IllegalArgumentException(fieldName + "não pode estar vazio.");
+            throw new ValidationException(fieldName + "não pode estar vazio.");
         }
     }
 
@@ -25,7 +27,7 @@ public final class Validator {
         requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (value.length() < min || value.length() > max) {
-            throw new IllegalArgumentException(fieldName + " deve conter entre: " + min + " e " + max + " caracteres.");
+            throw new ValidationException(fieldName + " deve conter entre: " + min + " e " + max + " caracteres.");
         }
     }
 
@@ -33,7 +35,7 @@ public final class Validator {
         requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (!value.matches("\\d{11}")) {
-            throw new IllegalArgumentException(fieldName + " deve conter exatamente 11 digitos.");
+            throw new ValidationException(fieldName + " deve conter exatamente 11 digitos.");
         }
     }
 
@@ -42,21 +44,21 @@ public final class Validator {
         requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (!value.matches("\\d{6}")) {
-            throw new IllegalArgumentException(fieldName + " deve conter exatamente 6 digitos.");
+            throw new ValidationException(fieldName + " deve conter exatamente 6 digitos.");
         }
     }
 
     public static void requirePastOrPresentDate(LocalDate date, String fieldName) {
         requireNonNull(date, fieldName);
         if (date.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException(fieldName + " não pode estar no futuro.");
+            throw new ValidationException(fieldName + " não pode estar no futuro.");
         }
     }
 
     public static void requirePastOrPresentDateTime(LocalDateTime dateTime, String fieldName) {
         requireNonNull(dateTime, fieldName);
         if (dateTime.isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException(fieldName + " não pode estar no futuro.");
+            throw new ValidationException(fieldName + " não pode estar no futuro.");
         }
     }
 }
