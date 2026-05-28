@@ -31,6 +31,14 @@ public final class Validator {
         }
     }
 
+    public static void requireValidPhoneFormat(String value, String fieldName) {
+        requireNonNull(value, fieldName);
+        requireNonBlank(value, fieldName);
+        if (!value.matches("\\d{11}")) {
+            throw new ValidationException(fieldName + " deve conter exatamente 11 digitos DD + *********.");
+        }
+    }
+
     public static void requireValidDocumentFormat(String value, String fieldName) {
         requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);

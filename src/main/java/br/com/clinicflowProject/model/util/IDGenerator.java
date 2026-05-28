@@ -2,9 +2,9 @@ package br.com.clinicflowProject.model.util;
 
 public class IDGenerator {
 
-    private static int doctorSequence = 1;
-    private static int patientSequence = 1;
-    private static int appointmentSequence = 1;
+    private static int doctorSequence = 0;
+    private static int patientSequence = 0;
+    private static int appointmentSequence = 0;
 
     private IDGenerator(){}
 
