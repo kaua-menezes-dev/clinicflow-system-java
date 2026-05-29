@@ -2,18 +2,18 @@ package br.com.clinicflowProject.model.enums;
 
 public enum AppointmentPriority {
 
-    LOW(72),
-    MEDIUM(48),
-    HIGH(24),
-    CRITICAL(8);
+    CRITICAL(4),
+    MEDIUM(2),
+    HIGH(3),
+    LOW(1);
 
-    private final int hours;
+    private final int weight;
 
-    AppointmentPriority(int hours) {
-        this.hours = hours;
+    AppointmentPriority(int weight) {
+        this.weight = weight;
     }
 
-    public int getHours() {
-        return hours;
+    public int getWeight() {
+        return weight;
     }
 }
