@@ -4,6 +4,7 @@ import br.com.clinicflowProject.model.exceptions.ValidationException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public final class Validator {
 
@@ -24,7 +25,6 @@ public final class Validator {
     }
 
     public static void requireValidTextFormat(String value, int min, int max, String fieldName) {
-        requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (value.length() < min || value.length() > max) {
             throw new ValidationException(fieldName + " deve conter entre: " + min + " e " + max + " caracteres.");
@@ -32,7 +32,6 @@ public final class Validator {
     }
 
     public static void requireValidPhoneFormat(String value, String fieldName) {
-        requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (!value.matches("\\d{11}")) {
             throw new ValidationException(fieldName + " deve conter exatamente 11 digitos DD + *********.");
@@ -40,7 +39,6 @@ public final class Validator {
     }
 
     public static void requireValidDocumentFormat(String value, String fieldName) {
-        requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (!value.matches("\\d{11}")) {
             throw new ValidationException(fieldName + " deve conter exatamente 11 digitos.");
@@ -49,7 +47,6 @@ public final class Validator {
 
 
     public static void requireValidCrmFormat(String value, String fieldName) {
-        requireNonNull(value, fieldName);
         requireNonBlank(value, fieldName);
         if (!value.matches("\\d{6}")) {
             throw new ValidationException(fieldName + " deve conter exatamente 6 digitos.");
@@ -67,6 +64,14 @@ public final class Validator {
         requireNonNull(dateTime, fieldName);
         if (dateTime.isAfter(LocalDateTime.now())) {
             throw new ValidationException(fieldName + " não pode estar no futuro.");
+        }
+    }
+
+    public static void requireEntryAndExit(LocalTime entry, LocalTime exit, String fieldName) {
+        requireNonNull(entry, fieldName);
+        requireNonNull(exit, fieldName);
+        if (!exit.isAfter(entry)) {
+            throw new ValidationException(fieldName + " não pode ser depois da data/horario de entrada.");
         }
     }
 }

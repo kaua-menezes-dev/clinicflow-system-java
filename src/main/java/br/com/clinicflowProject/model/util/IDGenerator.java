@@ -9,15 +9,15 @@ public class IDGenerator {
     private IDGenerator(){}
 
     public static String nextDoctorId(){
-        return String.format("Doc-%04d", doctorSequence++);
+        return String.format("Doc-%04d", ++doctorSequence);
     }
 
     public static String nextPatientId(){
-        return String.format("Pat-%04d", patientSequence++);
+        return String.format("Pat-%04d", ++patientSequence);
     }
 
     public static String nextAppointmentId(){
-        return String.format("Appt-%04d", appointmentSequence++);
+        return String.format("Appt-%04d", ++appointmentSequence);
     }
 
 }
