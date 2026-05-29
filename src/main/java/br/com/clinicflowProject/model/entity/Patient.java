@@ -66,11 +66,13 @@ public class Patient {
     public void setName(String name) {
         Validator.requireValidTextFormat(name, 3, 100, "Nome do paciente");
         this.name = name;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setBirthDate(LocalDate birthDate) {
         Validator.requirePastOrPresentDate(birthDate, "Data de nascimento");
         this.birthDate = birthDate;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setPhone(String phone) {
